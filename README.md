@@ -2,8 +2,6 @@
 
 ## Setup
 
-Ahlan It's Hakim
-
 Open your Terminal application and navigate to your projects codespace directory:
 
 ## Cloning the Auth boilerplate
