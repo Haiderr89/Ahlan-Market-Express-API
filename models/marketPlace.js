@@ -12,20 +12,27 @@ const commentSchema = new mongoose.Schema(
   );
 
 
-  const hootSchema = new mongoose.Schema(
+  const marketSchema = new mongoose.Schema(
     {
-      title: {
+      name: {
         type: String,
         required: true,
       },
-      text: {
+      price: {
+        type: Number,
+        required: true,
+      },
+      description: {
+        type: String,
+      },
+      image: {
         type: String,
         required: true,
       },
       category: {
         type: String,
         required: true,
-        enum: ['News', 'Sports', 'Games', 'Movies', 'Music', 'Television'],
+        enum: ['New Product', 'Used Product', 'Service'],
       },
       author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       comments: [commentSchema],
@@ -33,7 +40,6 @@ const commentSchema = new mongoose.Schema(
     { timestamps: true }
   );
 
-// models/hoot.js
 
-const Hoot = mongoose.model('Hoot', hootSchema);
-  module.exports = Hoot;
+const Market = mongoose.model('Market', marketSchema);
+  module.exports = Market;
