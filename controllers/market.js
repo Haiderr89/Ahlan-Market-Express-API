@@ -86,7 +86,6 @@ router.post('/', async (req, res) => {
   });
 
 
-
   //comments ==================
 
 router.post('/:hootId/comments', async (req, res) => {
