@@ -2,7 +2,7 @@
 
 const express = require('express');
 const verifyToken = require('../middleware/verify-token.js');
-const Hoot = require('../models/hoot.js');
+const marketPlace = require('../models/marketPlace.js');
 const router = express.Router();
 
 // ========== Public Routes ===========
