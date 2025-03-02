@@ -9,20 +9,19 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-      const hoots = await Hoot.find({})
+      const market = await marketPlace.find({})
         .populate('author')
         .sort({ createdAt: 'desc' });
-      res.status(200).json(hoots);
+      res.status(200).json(market);
     } catch (error) {
       res.status(500).json(error);
     }
   });
 
-  router.get('/:hootId', async (req, res) => {
+  router.get('/:marketId', async (req, res) => {
     try {
-      const hoot = await Hoot.findById(req.params.hootId).populate(['author', 'comments.author']);
-  
-      res.status(200).json(hoot);
+      const market = await marketPlace.findById(req.params.marketId).populate(['author', 'comments.author']);
+      res.status(200).json(market);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -35,52 +34,52 @@ router.use(verifyToken);
 router.post('/', async (req, res) => {
     try {
       req.body.author = req.user._id;
-      const hoot = await Hoot.create(req.body);
-      hoot._doc.author = req.user;
-      res.status(201).json(hoot);
+      const market = await marketPlace.create(req.body);
+      market._doc.author = req.user;
+      res.status(201).json(market);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
     }
   });
 
-  router.put('/:hootId', async (req, res) => {
+  router.put('/:marketId', async (req, res) => {
     try {
       // Find the hoot:
-      const hoot = await Hoot.findById(req.params.hootId);
+      const market = await marketPlace.findById(req.params.marketId);
   
       // Check permissions:
-      if (!hoot.author.equals(req.user._id)) {
+      if (!market.author.equals(req.user._id)) {
         return res.status(403).send("You're not allowed to do that!");
       }
   
       // Update hoot:
-      const updatedHoot = await Hoot.findByIdAndUpdate(
-        req.params.hootId,
+      const updatedMarket = await marketPlace.findByIdAndUpdate(
+        req.params.marketId,
         req.body,
         { new: true }
       );
   
       // Append req.user to the author property:
-      updatedHoot._doc.author = req.user;
+      updatedMarket._doc.author = req.user;
   
       // Issue JSON response:
-      res.status(200).json(updatedHoot);
+      res.status(200).json(updatedMarket);
     } catch (error) {
       res.status(500).json(error);
     }
   });
 
-  router.delete('/:hootId', async (req, res) => {
+  router.delete('/:marketId', async (req, res) => {
     try {
-      const hoot = await Hoot.findById(req.params.hootId);
+      const market = await marketPlace.findById(req.params.marketId);
   
-      if (!hoot.author.equals(req.user._id)) {
+      if (!market.author.equals(req.user._id)) {
         return res.status(403).send("You're not allowed to do that!");
       }
   
-      const deletedHoot = await Hoot.findByIdAndDelete(req.params.hootId);
-      res.status(200).json(deletedHoot);
+      const deletedMarket = await marketPlace.findByIdAndDelete(req.params.marketId);
+      res.status(200).json(deletedMarket);
     } catch (error) {
       res.status(500).json(error);
     }
