@@ -1,4 +1,4 @@
-# Express API - JWT Auth Back-End - Setup
+# Express API - JWT Auth Back-End - Setupses
 
 ## Setup
 
