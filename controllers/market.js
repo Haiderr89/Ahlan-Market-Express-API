@@ -117,7 +117,7 @@ router.post('/:marketId/comments', async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  });
+  }); 
 
   router.delete('/:marketId/comments/:commentId', async (req, res) => {
     try {
